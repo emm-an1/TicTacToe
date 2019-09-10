@@ -15,6 +15,7 @@ class TicTacToe {
     void getMove();
     void changePlayer();
     bool checkPositionMarked(int);
+    bool checkPositionEligible(int);
     bool checkWinCondition();
     //  int countMarks(char, int);
 
@@ -27,7 +28,7 @@ TicTacToe::TicTacToe() :
     {'4','5','6'},
     {'7','8','9'}},
 player('X') {
-    std::cout << "ctor\n";
+//   std::cout << "ctor\n";
 };
 
 
@@ -51,10 +52,10 @@ void TicTacToe::setBoardElement(char element, int i, int j) {
 // Ask for a position on the board. Mark an X or O depending on which player's turn it is.
 void TicTacToe::getMove() {
     bool foo=1;
-    int x{0}; //the position on the board that will get X or O.
-    while(foo==1) { // preventing an already chosen position to be overwritten. foo becomes zero if a free board position is chosen. Also, preventing illigal input
-        std::cout << "\n\n\n Player's " << player << " turn!\n";
-        while(x<1 | x>9) {
+    int x{-1}; //the position on the board that will get X or O.
+    while(foo==1) { // preventing an already chosen position to be overwritten. foo becomes zero if a free board position is chosen. Also, preventing illegal input
+        std::cout << "\n\n\nPlayer's " << player << " turn!\n";
+        while(checkPositionEligible(x)==0) {
             std::cout << "Choose a position between 1-9: ";
             std::cin >> x;
         };
@@ -62,6 +63,9 @@ void TicTacToe::getMove() {
             foo = 0;
         } else {
             std::cout << "Position already marked. Choose again.\n";
+            std::cout << "Choose a position between 1-9: ";
+            std::cin >> x;
+
         };
     };
     char mark{'O'};
@@ -87,6 +91,16 @@ bool TicTacToe::checkPositionMarked(int x) {
     }
     return 0;
 }
+bool TicTacToe::checkPositionEligible(int x) {
+    if(x<0) {
+        return 0;
+    }
+    if(x>9) {
+        return 0;
+    }
+    return 1;
+};
+
 
 bool TicTacToe::checkWinCondition() {
     int countX{0};
@@ -131,7 +145,7 @@ bool TicTacToe::checkWinCondition() {
             return 1;
         };
     };
-// Check Diagonals
+// Main Diagonal
     countX=0;
     countO=0;
     for(int i=0; i<3; i++) {
@@ -149,5 +163,26 @@ bool TicTacToe::checkWinCondition() {
     if (countO==3) {
         return 1;
     };
+
+    // Second Diagonal
+    countX=0;
+    countO=0;
+    for(int i=0; i<3; i++) {
+
+        if(board[i][3-i-1]=='X') {//// Count Xs
+            countX++;
+        };
+        if(board[i][3-i-1]=='O') {//// Count Os
+            countO++;
+        };
+    };
+    if (countX==3) {
+        return 1;
+    };
+    if (countO==3) {
+        return 1;
+    }
+
+
     return 0;
 }
