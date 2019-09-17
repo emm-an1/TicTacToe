@@ -1,15 +1,17 @@
 // TicTacToe engine
 
 #include<iostream>
+//#include<string>
 
 class TicTacToe {
   private:
-    char board[3][3];
+    char _board[3][3];
 
   public:
     char player;
 
     TicTacToe();
+    void ClearScreen();
     void drawBoard();
     void setBoardElement(char, int, int);
     void getMove();
@@ -23,7 +25,7 @@ class TicTacToe {
 
 // ctor
 TicTacToe::TicTacToe() :
-    board{
+    _board{
     {'1','2','3'},
     {'4','5','6'},
     {'7','8','9'}},
@@ -31,12 +33,16 @@ player('X') {
 //   std::cout << "ctor\n";
 };
 
+void TicTacToe::ClearScreen() {
+    std::cout << std::string( 100, '\n' ); // Somewhat silly, but platform independent.
+}
 
 void TicTacToe::drawBoard() {
-    system("CLS");
+    ClearScreen();
+
     for(int i=0; i<3; i++) {
         for(int j=0; j<3; j++) {
-            std::cout << board[i][j] << " ";
+            std::cout << _board[i][j] << " ";
         }
         std::cout << "\n";
     }
@@ -46,7 +52,7 @@ void TicTacToe::drawBoard() {
 
 void TicTacToe::setBoardElement(char element, int i, int j) {
 //    std::cout << "Setting element (" << i << "," << j << ") to " << element <<"\n";
-    board[i][j] = element;
+    _board[i][j] = element;
 }
 
 // Ask for a position on the board. Mark an X or O depending on which player's turn it is.
@@ -63,7 +69,7 @@ void TicTacToe::getMove() {
             foo = 0;
         } else {
             std::cout << "Position already marked. Choose again.\n";
-            std::cout << "Choose a position between 1-9: ";
+                      std::cout << "Choose a position between 1-9: ";
             std::cin >> x;
 
         };
@@ -85,7 +91,7 @@ void TicTacToe::changePlayer() {
 }
 
 bool TicTacToe::checkPositionMarked(int x) {
-    char p{board[(x-1)/3][(x-1)%3]};
+    char p{_board[(x-1)/3][(x-1)%3]};
     if((p=='X') | (p=='O')) {
         return 1;
     }
@@ -110,10 +116,10 @@ bool TicTacToe::checkWinCondition() {
         countX=0;
         countO=0;
         for(int j=0; j<3; j++) {
-            if(board[i][j]=='X') {//// Count Xs
+            if(_board[i][j]=='X') {//// Count Xs
                 countX++;
             };
-            if(board[i][j]=='O') {//// Count Os
+            if(_board[i][j]=='O') {//// Count Os
                 countO++;
             };
         };
@@ -131,10 +137,10 @@ bool TicTacToe::checkWinCondition() {
         countX=0;
         countO=0;
         for(int j=0; j<3; j++) {
-            if(board[j][i]=='X') {//// Count Xs
+            if(_board[j][i]=='X') {//// Count Xs
                 countX++;
             };
-            if(board[j][i]=='O') {//// Count Os
+            if(_board[j][i]=='O') {//// Count Os
                 countO++;
             };
         };
@@ -150,10 +156,10 @@ bool TicTacToe::checkWinCondition() {
     countO=0;
     for(int i=0; i<3; i++) {
 
-        if(board[i][i]=='X') {//// Count Xs
+        if(_board[i][i]=='X') {//// Count Xs
             countX++;
         };
-        if(board[i][i]=='O') {//// Count Os
+        if(_board[i][i]=='O') {//// Count Os
             countO++;
         };
     };
@@ -169,10 +175,10 @@ bool TicTacToe::checkWinCondition() {
     countO=0;
     for(int i=0; i<3; i++) {
 
-        if(board[i][3-i-1]=='X') {//// Count Xs
+        if(_board[i][3-i-1]=='X') {//// Count Xs
             countX++;
         };
-        if(board[i][3-i-1]=='O') {//// Count Os
+        if(_board[i][3-i-1]=='O') {//// Count Os
             countO++;
         };
     };

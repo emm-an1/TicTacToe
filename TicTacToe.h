@@ -9,6 +9,7 @@ class TicTacToe {
     char player; // player X or O.
 
     TicTacToe(); //ctor
+    void ClearScreen(); // Clear console.
     void drawBoard(); //printing the current board
 
     // Getters and Setters
