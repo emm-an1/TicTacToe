@@ -1,27 +1,7 @@
 // TicTacToe engine
 
 #include<iostream>
-//#include<string>
-
-class TicTacToe {
-  private:
-    char _board[3][3];
-
-  public:
-    char player;
-
-    TicTacToe();
-    void ClearScreen();
-    void drawBoard();
-    void setBoardElement(char, int, int);
-    void getMove();
-    void changePlayer();
-    bool checkPositionMarked(int);
-    bool checkPositionEligible(int);
-    bool checkWinCondition();
-    //  int countMarks(char, int);
-
-};
+#include "TicTacToe.h"
 
 // ctor
 TicTacToe::TicTacToe() :

@@ -3,7 +3,7 @@
 
 class TicTacToe {
   private:
-    char board[3][3]; // 3x3 char positions 1-9
+    char _board[3][3];// 3x3 char positions 1-9
 
   public:
     char player; // player X or O.
