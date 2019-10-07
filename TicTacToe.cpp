@@ -72,7 +72,7 @@ void TicTacToe::changePlayer() {
 
 bool TicTacToe::checkPositionMarked(int x) {
     char p{_board[(x-1)/3][(x-1)%3]};
-    if((p=='X') | (p=='O')) {
+    if((p=='X') || (p=='O')) {
         return 1;
     }
     return 0;
